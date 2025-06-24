@@ -1,0 +1,6 @@
+@AppCloudBlog.Api_HostAddress = http://localhost:5065
+
+GET {{AppCloudBlog.Api_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

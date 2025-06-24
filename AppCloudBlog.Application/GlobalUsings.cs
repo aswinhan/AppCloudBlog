@@ -1,0 +1,14 @@
+﻿global using AppCloudBlog.Domain.Entities;
+global using AppCloudBlog.Application.Common.Interfaces.IRepository;
+global using MediatR;
+global using System.Net;
+global using System.Security.Claims;
+global using FluentValidation;
+global using AppCloudBlog.Contracts.Responses;
+global using Microsoft.AspNetCore.Http;
+global using Microsoft.Extensions.Logging;
+global using System.Diagnostics;
+global using AppCloudBlog.Application.DTOs.Auth;
+global using Mapster;
+global using AppCloudBlog.Application.Common.Extensions;
+
