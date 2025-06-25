@@ -53,7 +53,7 @@ public static class AuthEndpoints
 
         group.MapGet("/me", async (HttpContext ctx, ISender sender) =>
         {
-            var result = await sender.Send(new GetCurrentUserCommand(ctx.User));
+            var result = await sender.Send(new GetCurrentUserQuery(ctx.User));
             return Results.Json(result, statusCode: (int)result.StatusCode);
         })
         .WithName("GetCurrentUser")

@@ -1,9 +1,4 @@
-﻿using AppCloudBlog.Application.Common.Interfaces.IRepository;
-using AppCloudBlog.Domain.Entities;
-using AppCloudBlog.Infrastructure.Persistence;
-using Microsoft.EntityFrameworkCore;
-
-namespace AppCloudBlog.Infrastructure.Services;
+﻿namespace AppCloudBlog.Infrastructure.Services;
 
 public class RefreshTokenService(ApplicationDbContext dbContext) : IRefreshTokenService
 {

@@ -11,4 +11,7 @@ global using System.Diagnostics;
 global using AppCloudBlog.Application.DTOs.Auth;
 global using Mapster;
 global using AppCloudBlog.Application.Common.Extensions;
+global using System.Text.RegularExpressions;
+global using AppCloudBlog.Application.DTOs.Blog;
+global using AppCloudBlog.Application.DTOs.Pagination;
 

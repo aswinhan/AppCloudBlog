@@ -27,5 +27,9 @@ app.UseAuthorization();
 
 // Endpoint Mapping
 app.MapGroup("/api/auth").MapAuthEndpoints();
+app.MapGroup("/api/posts").MapBlogPostEndpoints();
+app.MapGroup("/api").MapTagEndpoints();
+
+
 
 app.Run();

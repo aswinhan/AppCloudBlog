@@ -1,11 +1,11 @@
 ﻿namespace AppCloudBlog.Application.Features.Auth;
 
-public record GetCurrentUserCommand(ClaimsPrincipal User) : IRequest<APIResponse>;
+public record GetCurrentUserQuery(ClaimsPrincipal User) : IRequest<APIResponse>;
 
-public class GetCurrentUserCommandHandler(IAuthRepository authRepo)
-    : IRequestHandler<GetCurrentUserCommand, APIResponse>
+public class GetCurrentUserQueryHandler(IAuthRepository authRepo)
+    : IRequestHandler<GetCurrentUserQuery, APIResponse>
 {
-    public async Task<APIResponse> Handle(GetCurrentUserCommand request, CancellationToken ct)
+    public async Task<APIResponse> Handle(GetCurrentUserQuery request, CancellationToken ct)
     {
         var userId = request.User.GetUserId();
 

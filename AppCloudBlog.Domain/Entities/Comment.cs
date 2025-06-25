@@ -2,16 +2,15 @@
 
 public class Comment : AuditableBaseEntity
 {
-    public string Text { get; set; } = string.Empty;
-    public bool IsApproved { get; set; } = false;
-
+    public string Content { get; set; } = string.Empty;
     public Guid PostId { get; set; }
-    public BlogPost Post { get; set; } = default!;
-
     public Guid UserId { get; set; }
-    public User User { get; set; } = default!;
+    public Guid? ParentId { get; set; } // for nested replies
+    public string Status { get; set; } = "Pending"; // Approved, Rejected, Pending
 
-    public Guid? ParentId { get; set; }
+    // Navigation
+    public BlogPost Post { get; set; } = default!;
+    public User User { get; set; } = default!;
     public Comment? Parent { get; set; }
     public ICollection<Comment> Replies { get; set; } = [];
 }

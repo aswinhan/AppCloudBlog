@@ -18,3 +18,4 @@ global using FluentValidation;
 global using MediatR;
 global using System.Reflection;
 global using AppCloudBlog.Application.Features.Auth;
+global using AppCloudBlog.Application.Features.BlogPosts;
