@@ -14,4 +14,6 @@ global using AppCloudBlog.Application.Common.Extensions;
 global using System.Text.RegularExpressions;
 global using AppCloudBlog.Application.DTOs.Blog;
 global using AppCloudBlog.Application.DTOs.Pagination;
+global using AppCloudBlog.Application.DTOs.Comment;
+global using AppCloudBlog.Application.DTOs.User;
 

@@ -1,9 +1,13 @@
-﻿namespace AppCloudBlog.Application.Features.BlogPosts;
+﻿using AppCloudBlog.Application.Common.Interfaces.Services;
+
+namespace AppCloudBlog.Application.Features.BlogPosts;
 
 public record TogglePublishStatusCommand(string SlugOrId, ClaimsPrincipal User) : IRequest<APIResponse>;
 
-public class TogglePublishStatusCommandHandler(IBlogPostRepository blogRepo)
-    : IRequestHandler<TogglePublishStatusCommand, APIResponse>
+public class TogglePublishStatusCommandHandler(
+    IBlogPostRepository blogRepo,
+    INotificationService notificationService
+) : IRequestHandler<TogglePublishStatusCommand, APIResponse>
 {
     public async Task<APIResponse> Handle(TogglePublishStatusCommand request, CancellationToken ct)
     {
@@ -21,21 +25,24 @@ public class TogglePublishStatusCommandHandler(IBlogPostRepository blogRepo)
         if (post.AuthorId != userId)
             return APIResponse.Fail("Unauthorized", HttpStatusCode.Forbidden);
 
+        var wasDraft = post.Status == "Draft";
+
+        post.Status = post.Status == "Published" ? "Draft" : "Published";
         if (post.Status == "Published")
-        {
-            post.Status = "Draft";
-        }
-        else
-        {
-            post.Status = "Published";
             post.PublishAt ??= DateTime.UtcNow;
-        }
 
         post.UpdatedAt = DateTime.UtcNow;
 
         await blogRepo.UpdateAsync(post);
 
+        // 🔔 Notify followers only if switching from Draft → Published
+        if (wasDraft && post.Status == "Published")
+        {
+            await notificationService.NotifyFollowersOnNewPostAsync(post.Author, post);
+        }
+
         return APIResponse.Ok($"Post status updated to '{post.Status}'.");
     }
+
 }
 

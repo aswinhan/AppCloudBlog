@@ -19,3 +19,7 @@ global using MediatR;
 global using System.Reflection;
 global using AppCloudBlog.Application.Features.Auth;
 global using AppCloudBlog.Application.Features.BlogPosts;
+global using AppCloudBlog.Application.Features.Comments;
+global using AppCloudBlog.Application.Features.Users;
+global using AppCloudBlog.Application.Features.Notifications;
+global using Microsoft.AspNetCore.Mvc;

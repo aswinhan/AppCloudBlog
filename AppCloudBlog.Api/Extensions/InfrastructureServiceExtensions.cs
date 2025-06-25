@@ -1,4 +1,5 @@
-﻿using AppCloudBlog.Infrastructure.Options;
+﻿using AppCloudBlog.Application.Common.Interfaces.Services;
+using AppCloudBlog.Infrastructure.Options;
 
 namespace AppCloudBlog.Api.Extensions;
 
@@ -21,6 +22,10 @@ public static class InfrastructureServiceExtensions
         services.AddScoped<IBlogPostRepository, BlogPostRepository>();
         services.AddScoped<ITagRepository, TagRepository>();
         services.AddScoped<ICommentRepository, CommentRepository>();
+        services.AddScoped<INotificationService, NotificationService>();
+        services.AddScoped<INotificationRepository, NotificationRepository>();
+
+
 
 
 

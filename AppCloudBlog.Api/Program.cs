@@ -29,7 +29,9 @@ app.UseAuthorization();
 app.MapGroup("/api/auth").MapAuthEndpoints();
 app.MapGroup("/api/posts").MapBlogPostEndpoints();
 app.MapGroup("/api").MapTagEndpoints();
-
+app.MapGroup("/api").MapCommentEndpoints();
+app.MapGroup("/api").MapUserEndpoints();
+app.MapGroup("/api").MapNotificationEndpoints();
 
 
 app.Run();

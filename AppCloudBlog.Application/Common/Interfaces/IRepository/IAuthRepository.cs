@@ -6,6 +6,13 @@ public interface IAuthRepository
     Task<bool> IsUniqueEmailAsync(string username);
     Task<User> CreateAsync(User user);
     Task<User?> GetByIdAsync(Guid userId);
+    Task<User?> GetByUsernameAsync(string username);
+    Task<bool> IsFollowingAsync(Guid followerId, Guid followeeId);
+    Task FollowAsync(Guid followerId, Guid followeeId);
+    Task UnfollowAsync(Guid followerId, Guid followeeId);
+    Task<int> GetFollowerCountAsync(Guid userId);
+    Task<List<User>> GetFollowersAsync(Guid userId);
+    Task<List<User>> GetFollowingAsync(Guid userId);
 
 }
 

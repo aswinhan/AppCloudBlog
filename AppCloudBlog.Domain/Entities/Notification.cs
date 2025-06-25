@@ -1,14 +1,14 @@
 ﻿namespace AppCloudBlog.Domain.Entities;
 
-public class Notification
+public class Notification : AuditableBaseEntity
 {
-    public Guid Id { get; set; } = Guid.NewGuid();
-    public Guid RecipientId { get; set; }
-    public string Type { get; set; } = default!; // e.g., "Comment", "Like"
-    public string Message { get; set; } = default!;
-    public string? Link { get; set; } // e.g., "/posts/slug"
+    public Guid UserId { get; set; }  
+    public string Title { get; set; } = string.Empty; 
+    public string Message { get; set; } = string.Empty;
+    public string? Link { get; set; } 
     public bool IsRead { get; set; } = false;
-    public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
 
-    public User Recipient { get; set; } = default!;
+    // Navigation
+    public User User { get; set; } = default!;
 }
+
