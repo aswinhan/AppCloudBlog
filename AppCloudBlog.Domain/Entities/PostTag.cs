@@ -8,3 +8,4 @@ public class PostTag
     public Guid TagId { get; set; }
     public Tag Tag { get; set; } = default!;
 }
+

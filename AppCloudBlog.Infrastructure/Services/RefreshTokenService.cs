@@ -11,7 +11,7 @@ public class RefreshTokenService(ApplicationDbContext dbContext) : IRefreshToken
             .FirstOrDefaultAsync(rt =>
                 rt.Token == token &&
                 !rt.IsRevoked &&
-                rt.Expires > DateTime.UtcNow);
+                rt.ExpiresAt > DateTime.UtcNow);
     }
 
     public async Task RevokeAsync(RefreshToken token)
@@ -25,7 +25,7 @@ public class RefreshTokenService(ApplicationDbContext dbContext) : IRefreshToken
         var refreshToken = new RefreshToken
         {
             Token = Guid.NewGuid().ToString(),
-            Expires = DateTime.UtcNow.AddDays(7),
+            ExpiresAt = DateTime.UtcNow.AddDays(7),
             UserId = user.Id
         };
 
