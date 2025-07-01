@@ -1,9 +1,8 @@
-using AppCloudBlog.Api.Endpoints;
-
 var builder = WebApplication.CreateBuilder(args);
 
-// Service Registration
-builder.Services.AddApplicationServices(); // MediatR, Validators, Behaviors
+// Register services
+builder.Services.AddCorsPolicies(builder.Configuration);           // CORS
+builder.Services.AddApplicationServices();                         // MediatR, Validators, Behaviors
 builder.Services.AddInfrastructureServices(builder.Configuration); // DB, Repositories
 builder.Services.AddJwtAuthentication(builder.Configuration);      // JWT Auth Setup
 builder.Services.AddSwaggerWithJwt();                              // Swagger + JWT Auth
@@ -19,9 +18,8 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-
-app.UseMiddleware<ExceptionMiddleware>(); // Global exception handler
-
+app.UseCorsPolicies();                    // CORS middleware
+app.UseMiddleware<ExceptionMiddleware>(); // Global exception Middleware
 app.UseAuthentication();
 app.UseAuthorization();
 

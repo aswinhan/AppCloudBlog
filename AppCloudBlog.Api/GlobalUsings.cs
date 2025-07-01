@@ -23,3 +23,4 @@ global using AppCloudBlog.Application.Features.Comments;
 global using AppCloudBlog.Application.Features.Users;
 global using AppCloudBlog.Application.Features.Notifications;
 global using Microsoft.AspNetCore.Mvc;
+global using AppCloudBlog.Api.Endpoints;

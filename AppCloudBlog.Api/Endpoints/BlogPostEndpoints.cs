@@ -82,8 +82,8 @@ public static class BlogPostEndpoints
         // Public list with query params
         group.MapGet("/", async (
             HttpContext ctx,
-            [AsParameters] int page,
-            [AsParameters] int pageSize,
+            [FromQuery] int page,
+            [FromQuery] int pageSize,
             ISender sender) =>
         {
             var result = await sender.Send(new ListPublicPostsQuery(ctx.User, page, pageSize));
@@ -97,9 +97,9 @@ public static class BlogPostEndpoints
         // Author list with filters
         group.MapGet("/mine", async (
             HttpContext ctx,
-            [AsParameters] int page,
-            [AsParameters] int pageSize,
-            [AsParameters] string? status,
+            [FromQuery] int page,
+            [FromQuery] int pageSize,
+            [FromQuery] string? status,
             ISender sender) =>
         {
             var result = await sender.Send(new ListMyPostsQuery(ctx.User, page, pageSize, status));
@@ -112,12 +112,15 @@ public static class BlogPostEndpoints
 
         group.MapGet("/search", async (
             HttpContext ctx,
-            [AsParameters] string? keyword,
-            [AsParameters] List<string>? tags,
-            [AsParameters] int page,
-            [AsParameters] int pageSize,
+            [FromQuery] string? keyword,
+            [FromQuery(Name = "tags")] string? tagsCsv,
+            [FromQuery] int page,
+            [FromQuery] int pageSize,
             ISender sender) =>
         {
+            var tags = string.IsNullOrWhiteSpace(tagsCsv)
+        ? [] : tagsCsv.Split(',', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries).ToList();
+
             var result = await sender.Send(new SearchPostsQuery(ctx.User, keyword, tags, page, pageSize));
             return Results.Json(result, statusCode: (int)result.StatusCode);
         })
